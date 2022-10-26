@@ -20,9 +20,8 @@ class Usuario {
             return `Hay un total de ${this.mascotas.length} mascotas.`;
       }
 
-      addBook(obString) {
-            this.libros.push(obString)
-            return this.libros
+      addBook(libro, creador) {
+            this.libros.push({ nombre: libro, autor: creador })
       }
 
       getBookNames() {
@@ -41,7 +40,8 @@ console.table(User.addMascota("Conejo"))
 console.log("=========================")
 console.log(User.getCountMascotas())
 console.log("=========================")
-User.addBook("Fundamentos de JavaScript")
-User.addBook("Backend para novatos")
+User.addBook("Don Quijote de la Mancha", "Miguel de Cervantes")
+User.addBook("Hamlet", "William Shakespeare")
+User.addBook("La Divina Comedia", "Dante Alighieri")
 console.table(User.getBookNames())
 console.log("=========================")
