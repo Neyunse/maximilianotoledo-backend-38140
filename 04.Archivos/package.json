@@ -1,0 +1,12 @@
+{
+  "name": "04.Archivos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ."
+  },
+  "dependencies": {
+    "uniqid": "^5.4.0"
+  }
+}
