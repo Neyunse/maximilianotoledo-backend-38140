@@ -3,7 +3,7 @@ const path = require('path');
 const uniqid = require('uniqid');
 class Container {
       constructor(file) {
-            this.file = file
+            this.file = path.resolve(__dirname, file)
       }
 
 
@@ -12,7 +12,7 @@ class Container {
        * @returns An array of objects.
        */
       async getAll() {
-            const rq = await fs.promises.readFile(path.resolve(__dirname, this.file), { encoding: 'utf8' })
+            const rq = await fs.promises.readFile(this.file, { encoding: 'utf8' })
 
             return rq ? JSON.parse(rq) : []
       }
@@ -30,7 +30,8 @@ class Container {
                   let stringify = JSON.stringify(writeFile, null, 2)
                   await fs.writeFile(this.file, stringify, (err) => {
                         if (err) console.error(err);
-                        console.log(`File written successfully, you can check the file here: ${path.resolve(__dirname, this.file)}`);
+                        console.log(`File written successfully, you can check the file here: ${this.file}`);
+                        console.log(`Your product id is: ${obj.id}`)
                   });
 
                   return writeFile
@@ -40,7 +41,8 @@ class Container {
             let stringify = JSON.stringify(obj, null, 2)
             await fs.writeFile(this.file, [stringify], (err) => {
                   if (err) console.error(err);
-                  console.log(`File written successfully, you can check the file here: ${path.resolve(__dirname, this.file)}`);
+                  console.log(`File written successfully, you can check the file here: ${this.file}`);
+                  console.log(`Your product id is: ${obj.id}`)
             });
 
             return obj.id
@@ -76,7 +78,8 @@ class Container {
                   let stringify = JSON.stringify(filterRemove, null, 2)
                   await fs.writeFile(this.file, stringify, (err) => {
                         if (err) console.error(err);
-                        console.log(`File written successfully, you can check the file here: ${path.resolve(__dirname, this.file)}`);
+                        console.log(`File written successfully, you can check the file here: ${this.file}`);
+                        console.log(`Your product id ('${id}') was successfully removed`)
                   });
             } catch (error) {
                   console.error(error)
@@ -89,9 +92,19 @@ class Container {
       async deleteAll() {
             await fs.writeFile(this.file, "[]", (err) => {
                   if (err) console.error(err);
-                  console.log(`File written successfully, you can check the file here: ${path.resolve(__dirname, this.file)}`);
+                  console.log(`File written successfully, you can check the file here: ${this.file}`);
+                  console.log("All products was successfully deleted")
             });
 
       }
 
 }
+
+const product = new Container("products.json")
+
+product.save({
+      "title": "Nintento Switch",
+      "price": 100,
+      "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_883371-MLA32731749246_112019-O.webp",
+})
+
