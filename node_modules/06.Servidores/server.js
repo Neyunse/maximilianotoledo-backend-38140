@@ -7,12 +7,12 @@ app.get('/', (req, res) => {
       res.send('Hello World!')
 })
 
-app.get('/api/v1/products', async (req, res) => {
+app.get('/api/products', async (req, res) => {
       const all = await Product.getAll()
       res.json(all)
 })
 
-app.get('/api/v1/products/random', async (req, res) => {
+app.get('/api/products/random', async (req, res) => {
       const random = await Product.getRandom()
       res.json(random)
 })
