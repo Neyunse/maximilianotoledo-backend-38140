@@ -10,5 +10,8 @@
   "devDependencies": {
     "express": "^4.18.2",
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "uniqid": "^5.4.0"
   }
 }
