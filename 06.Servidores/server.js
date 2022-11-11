@@ -20,8 +20,11 @@ app.get('/api/products/random', async (req, res) => {
 
 app.get('*', (req, res) => {
       res.status(404).json({
-            'error': 'Not Found',
-            'message': 'This url does not exist.'
+            error: {
+                  code: 400,
+                  type: 'Not Found',
+                  message: 'This url does not exist.'
+            }
       })
 })
 
