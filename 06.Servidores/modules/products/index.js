@@ -34,7 +34,7 @@ class Container {
                         console.log(`Your product id is: ${obj.id}`)
                   });
 
-                  return writeFile
+                  return obj
 
             }
 
@@ -45,7 +45,7 @@ class Container {
                   console.log(`Your product id is: ${obj.id}`)
             });
 
-            return obj.id
+            return obj
       }
 
       /**
@@ -106,5 +106,6 @@ class Container {
 }
 
 const Product = new Container("products.json")
+
 
 module.exports = Product
