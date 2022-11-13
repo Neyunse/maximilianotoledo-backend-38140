@@ -1,0 +1,47 @@
+Arguments: 
+  G:\Program Files\nodejs\node.exe C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-8.0.345.1-hotspot\bin;C:\Program Files (x86)\Semeru\jre-8.0.345.1-openj9\bin;C:\Program Files\Semeru\jdk-8.0.345.1-openj9\bin;C:\Program Files\Semeru\jdk-18.0.2.9-openj9\bin;C:\Program Files\Semeru\jre-18.0.2.9-openj9\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;G:\Program Files\nodejs\;G:\Program Files\Git\cmd;F:\Program Files (x86)\Touch Portal\plugins\adb\platform-tools;;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;G:\Program Files\python\Scripts\;G:\Program Files\python\;C:\Users\Usuario\AppData\Local\Microsoft\WindowsApps;;F:\Apps\Microsoft VS Code\bin;C:\Users\Usuario\AppData\Roaming\npm;C:\Users\Usuario\.fly\bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.15.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: G:\proyects\MaximilianoToledo-Backend-38140\package.json: Unexpected token } in JSON at position 89
+      at JSON.parse (<anonymous>)
+      at C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\Usuario\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "06.Servidores",
+    "version": "1.0.0",
+    "main": "server.js",
+    "license": "MIT",
+    "scripts": {
+      "start": "node .",
+      "r:dev": "nodemon ."
+    },
+    "devDependencies": {
+      "express": "^4.18.2",
+      "nodemon": "^2.0.20"
+    },
+    "dependencies": {
+      "uniqid": "^5.4.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
