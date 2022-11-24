@@ -80,7 +80,12 @@ class Products {
             try {
                   const products = await this.getAll()
                   let find = products.find(product => product.id === int)
-                  return find ? find : null
+                  if (!find) {
+                        return null
+                  }
+
+                  return find
+
             } catch (error) {
                   console.log(error)
             }

@@ -5,32 +5,52 @@ let router = new Router()
 module.exports = app => {
       app.use("/api/products", router);
 
-      router.get("/", (req, res, next) => {
-            const pro = products.getAll()
+      router.get("/", async (req, res, next) => {
+            const pro = await products.getAll()
             res.json(pro)
 
       })
 
-      router.get("/:id", (req, res, next) => {
-
+      router.get("/:id", async (req, res, next) => {
+            const { id } = req.params
             try {
-                  const pro = products.getById(req.params["id"])
+                  const pro = await products.getById(id)
+                  if (pro === null) {
+                        throw new Error("Not found")
+                  }
 
                   res.json(pro)
-
-            } catch (err) {
-                  res.status(400).json({
+            } catch (error) {
+                  res.status(404).json({
                         error: {
-                              code: 400,
-                              message: "Bad Request"
+                              code: 404,
+                              message: error.message
                         }
                   })
             }
 
       })
 
-      router.post("/", (req, res, next) => {
+      router.post("/", async (req, res, next) => {
+            let body = req.body
+            try {
+                  if (body) {
+                        const pro = await products.save(body)
 
+                        res.json(pro)
+                  } else {
+                        throw new Error("Bad Request")
+
+                  }
+
+            } catch (error) {
+                  res.status(400).json({
+                        error: {
+                              code: 404,
+                              message: error.message
+                        }
+                  })
+            }
       })
 
       router.put("/", (req, res, next) => {
