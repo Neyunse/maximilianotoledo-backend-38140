@@ -53,8 +53,12 @@ module.exports = app => {
                   if (pro === null) {
                         throw new Error(`The id ("${id}") does not refer to any registered product.`)
                   }
-
-                  res.json(pro)
+                  res.status(200).json({
+                        error: {
+                              code: 200,
+                              message: `The product containing the following id ("${id}") was deleted.`
+                        }
+                  })
             } catch (error) {
                   res.status(404).json({
                         error: {

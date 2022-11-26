@@ -102,10 +102,11 @@ class Products {
             }
       }
 
+    
       /**
-       * * It takes an id, finds the product with that id, removes it from the array, and then writes the
-       * * new array to the file
+       * It takes an id, finds the product with that id, and then deletes it from the database
        * @param int - The id of the product you want to delete
+       * @returns a boolean value.
        */
       async delById(int) {
             const products = await this.getAll()
