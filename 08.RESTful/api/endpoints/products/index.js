@@ -33,31 +33,35 @@ module.exports = app => {
 
       router.post("/", async (req, res, next) => {
             let body = req.body
+            const pro = await products.save(body)
+
+            res.json(pro)
+
+      })
+
+      router.put("/", async (req, res, next) => {
+            let body = req.body
+            const pro = await products.update(body)
+
+            res.json(pro)
+      })
+
+      router.delete("/:id", async (req, res, next) => {
+            const { id } = req.params
             try {
-                  if (body) {
-                        const pro = await products.save(body)
-
-                        res.json(pro)
-                  } else {
-                        throw new Error("Bad Request")
-
+                  const pro = await products.delById(id)
+                  if (pro === null) {
+                        throw new Error(`The id ("${id}") does not refer to any registered product.`)
                   }
 
+                  res.json(pro)
             } catch (error) {
-                  res.status(400).json({
+                  res.status(404).json({
                         error: {
                               code: 404,
                               message: error.message
                         }
                   })
             }
-      })
-
-      router.put("/", (req, res, next) => {
-
-      })
-
-      router.delete("/id", (req, res, next) => {
-
       })
 }

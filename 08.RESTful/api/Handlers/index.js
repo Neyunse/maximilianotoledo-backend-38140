@@ -1,5 +1,5 @@
 const { promises: fs } = require("fs")
-
+const uniqid = require("uniqid")
 class Products {
       constructor(route) {
             this.route = route
@@ -20,27 +20,32 @@ class Products {
        */
       async save(obj) {
             const products = await this.getAll()
-            obj.id = this.searchId(obj, products)
+            console.log(obj)
+            if (!obj) {
+                  return null
+            } else {
+                  obj.id = uniqid()
 
-            if (products.length >= 0) {
-                  let writeFile = [...products, obj]
-                  let stringify = JSON.stringify(writeFile, null, 2)
-                  await fs.writeFile(this.route, stringify, (err) => {
+                  if (products.length >= 0) {
+                        let writeFile = [...products, obj]
+                        let stringify = JSON.stringify(writeFile, null, 2)
+                        await fs.writeFile(this.route, stringify, (err) => {
+                              if (err) console.error(err);
+                              console.log(`Your product id is: ${obj.id}`)
+                        });
+
+                        return obj
+
+                  }
+
+                  let stringify = JSON.stringify(obj, null, 2)
+                  await fs.writeFile(this.route, [stringify], (err) => {
                         if (err) console.error(err);
                         console.log(`Your product id is: ${obj.id}`)
                   });
 
                   return obj
-
             }
-
-            let stringify = JSON.stringify(obj, null, 2)
-            await fs.writeFile(this.route, [stringify], (err) => {
-                  if (err) console.error(err);
-                  console.log(`Your product id is: ${obj.id}`)
-            });
-
-            return obj
       }
 
       /**
@@ -52,14 +57,20 @@ class Products {
       async update(obj) {
             const products = await this.getAll()
             const item = products.map(i => i.id).indexOf(obj.id)
-            if (i >= 0) {
+            if (item >= 0) {
                   const old = products[item]
                   obj.id = products[item].id
                   products[item] = obj
 
                   try {
                         await fs.writeFile(this.route, JSON.stringify(products, null, 2))
-                        return [obj, old]
+                        let up = [
+                              {
+                                    old: old,
+                                    new: obj
+                              }
+                        ]
+                        return up
                   } catch (error) {
                         console.error(error)
                         return []
@@ -99,39 +110,27 @@ class Products {
       async delById(int) {
             const products = await this.getAll()
             const Single = products.find(element => element.id == int)
-            const filter = products.filter(element => element != Single)
-            try {
-                  let stringify = JSON.stringify(filter, null, 2)
-                  await fs.writeFile(this.route, stringify, (err) => {
-                        if (err) throw new Error(err);
-                        console.log(`Your product id ('${id}') was successfully removed`)
-                  });
-            } catch (error) {
-                  console.error(error)
+
+
+            if (Single) {
+
+                  try {
+                        const filter = products.filter(element => element != Single)
+                        let stringify = JSON.stringify(filter, null, 2)
+                        await fs.writeFile(this.route, stringify, (err) => {
+                              if (err) throw new Error(err);
+                              console.log(`Your product id ('${id}') was successfully removed`)
+                        });
+
+                        return true
+                  } catch (error) {
+                        console.error(error.message);
+                  }
+            } else {
+                  return null
+
             }
       }
-
-      /**
-       * * It takes an object and an array as arguments, and returns the object's id property, which is
-       * * the highest number in the array, plus one.
-       * 
-       * @param obj - the object you want to add to the array
-       * @param arr - the array of objects
-       * @returns the id of the object.
-       */
-      searchId(obj, arr) {
-            arr.map(item => {
-                  if (item.id === obj.id) {
-                        arr.sort((a, b) => a - b)
-                        obj.id = parseInt(arr[arr.length - 1].id) + 1
-                        return obj.id
-                  }
-            })
-
-            return obj.id
-      }
-
-
 }
 
 module.exports = {
