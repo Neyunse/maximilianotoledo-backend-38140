@@ -1,0 +1,30 @@
+<br><br>
+<div>
+    <h2 style="color: brown;">My Products</h2>
+    <% if (products.length > 0) { %>
+     <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Picture</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(product of products) { %>
+          <tr>
+            <th><%= product.name %></th>
+            <th><%= product.price %></th>
+            <th><img
+              style="width: 60px"
+              src=<%=producto.picture %>
+              alt=<%=producto.name %>
+            /></th>
+          </tr>
+        <% } %>
+      </tbody>
+     </table>
+    <% } else {%>
+        <p class="alert alert-danger">You don't have any product, add one!</p>
+    <% }%>
+</div>

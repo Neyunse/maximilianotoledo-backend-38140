@@ -1,0 +1,25 @@
+div(style="width:100%; max-width:600px; margin:20px auto;")  
+    h1(style="color:blue;") Add product
+    br
+    form(action='/products' method='post')
+            div(class='.d-flex.flex-column.align-items-center') 
+            input.form-control(type='text' name='name' placeholder='Product Name' style='margin-bottom: 10px;')
+            input.form-control(type='number' name='price' placeholder='100' style='margin-bottom: 10px;')
+            input.form-control(type='text' name='picture' placeholder='Product Picture' style='margin-bottom: 10px;')
+            button.btn.btn-primary(type='submit') Add
+    h2(style="color:brown;") My Products
+    if products.length != 0
+        div(class="table-responsive")
+            table.table.table-striped.table-hover
+                tr
+                    th Name
+                    th Price
+                    th Picture
+                each val in products
+                    tr
+                        td= val.name
+                        td= val.price
+                        td
+                            img(style="width: 60px", src=val.picture, alt=val.name)
+    else
+        h3(class="alert alert-danger") You don't have any product, add one!
