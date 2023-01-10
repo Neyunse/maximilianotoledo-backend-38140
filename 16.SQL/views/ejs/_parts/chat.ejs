@@ -1,0 +1,40 @@
+<div class="chat">
+  <div>
+    <form data-login>
+      <div class="d-flex flex-column align-items-center">
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Your Name"
+          style="margin-bottom: 10px"
+        />
+        <input
+          type="email"
+          name="Email"
+          placeholder="example@example.com"
+          class="form-control"
+          style="margin-bottom: 10px"
+        />
+        <button class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <div>
+      <section
+        data-messageList
+        style="max-height: 246px; overflow: auto; height: 246px"
+      ></section>
+      <input
+        type="text"
+        name="message"
+        class="form-control"
+        placeholder="Your message"
+        style="margin-bottom: 10px"
+        data-message
+      />
+      <button class="btn btn-primary send" data-sendmessage>Send</button>
+    </div>
+  </div>
+</div>
